@@ -1,0 +1,36 @@
+<div class="row">
+  <button type="btn" class="btn btn-danger" {{action 'decrementFaces'}}>-</button>
+    {{diceFaces}}
+  <button type="btn" class="btn btn-success" {{action 'incrementFaces'}}>+</button>
+  <button type="btn" class="btn btn-default" {{action 'createDice' diceFaces}}>Create</button>
+</div>
+<div class="row">
+  <div class="col-xs-6 col-xs-offset-3">
+    <button type="btn" class="btn btn-default" {{action 'rollAll'}}>SWAG!</button>
+  </div>
+</div>
+{{#if showProgressBar}}
+  <div class="row bar-row">
+    <div class="col-xs-12">
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" aria-valuenow="{{diceSum}}" aria-valuemin="0" aria-valuemax="{{maxSum}}" style="{{sumPercent}}">
+            {{diceSum}}€
+          </div>
+        </div>
+      </div>
+  </div>
+  <div class="row game-row">
+    <div class="col-xs-12">
+      <div class="game-box">
+        <span class="game">{{liquid-bind game}}</span>
+      </div>
+    </div>
+  </div>
+{{/if}}
+<div class="row">
+  <div class="col-xs-12 bla">
+    {{#each dice in model}}
+      {{dice-item dice=dice}}
+    {{/each}}
+  </div>
+</div>
