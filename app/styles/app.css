@@ -1,9 +1,30 @@
+h1, p {
+  font-family: 'Oswald', sans-serif;
+  font-weight: bold;
+  margin-bottom: 0;
+}
+p {
+  margin-top: 0.25em;
+}
 .dice {
   border: 1px solid black;
   height: 3em;
   line-height: 3em;
   font-size: 1.5em;
   border-radius: 5px;
+}
+.settings-prop {
+  border: 1px solid black;
+  height: 2em;
+  line-height: 2em;
+  font-size: 1.25em;
+  border-radius: 5px;
+}
+.settings-box {
+  padding: 5px;
+}
+.settings-box button{
+  width: 100%;
 }
 .dice-box {
   margin-bottom: 0.25em;
@@ -13,6 +34,7 @@
   padding: 5px;
 }
 .progress {
+  margin-top: 0.25em;
   margin-bottom: 0;
   height: 2em;
   font-size: 1em;
@@ -23,11 +45,10 @@
   font-size: 1em;
   border-radius: 5px;
 }
-h1 {
-  margin-bottom: 0;
-}
 h2 {
-  margin-top: 0;
+  margin-top: 0.25em;
+  margin-bottom: 0;
+  font-weight: bold;
 }
 .game-row {
   padding: 5px;

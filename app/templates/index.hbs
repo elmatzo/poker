@@ -1,13 +1,42 @@
+<p>Modus</p>
 <div class="row">
-  <button type="btn" class="btn btn-danger" {{action 'decrementFaces'}}>-</button>
-    {{diceFaces}}
-  <button type="btn" class="btn btn-success" {{action 'incrementFaces'}}>+</button>
-  <button type="btn" class="btn btn-default" {{action 'createDice' diceFaces}}>Create</button>
-</div>
-<div class="row">
-  <div class="col-xs-6 col-xs-offset-3">
-    <button type="btn" class="btn btn-default" {{action 'rollAll'}}>SWAG!</button>
+  <div class="btn-group" role="group" aria-label="Large button group">
+    <button type="button" {{bind-attr class="randomMode:btn-default:btn-primary :btn"}} {{action 'toggleMode'}}>Selbst</button>
+    <button type="button" {{bind-attr class="randomMode:btn-primary:btn-default :btn"}} {{action 'toggleMode'}}>Zufall</button>
   </div>
+</div>
+{{#if randomMode}}
+<p>Maximale Augenzahl</p>
+{{else}}
+<p>Augenzahl</p>
+{{/if}}
+<div class="row settings">
+  <div class="settings-box col-xs-2 col-xs-offset-3">
+    <button type="btn" class="btn btn-danger" {{action 'decrementFaces'}}>-</button>
+  </div>
+  <div class="settings-box col-xs-2">
+    <div class="settings-prop" {{action 'createDice' diceFaces}}>{{liquid-bind diceFaces}}</div>
+  </div>
+  <div class="settings-box col-xs-2">
+    <button type="btn" class="btn btn-success" {{action 'incrementFaces'}}>+</button>
+  </div>
+</div>
+{{#if randomMode}}
+<p>Maximale Würfel</p>
+<div class="row settings">
+  <div class="settings-box col-xs-2 col-xs-offset-3">
+    <button type="btn" class="btn btn-danger" {{action 'decrementDices'}}>-</button>
+  </div>
+  <div class="settings-box col-xs-2">
+    <div class="settings-prop">{{liquid-bind maxDices}}</div>
+  </div>
+  <div class="settings-box col-xs-2">
+    <button type="btn" class="btn btn-success" {{action 'incrementDices'}}>+</button>
+  </div>
+</div>
+{{/if}}
+<div class="row">
+  <button type="btn" class="btn btn-default col-xs-10 col-xs-offset-1" {{action 'rollAll'}}>SWAG!</button>
 </div>
 {{#if showProgressBar}}
   <div class="row bar-row">

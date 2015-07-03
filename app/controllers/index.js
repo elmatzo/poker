@@ -3,6 +3,10 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   diceFaces: 6,
 
+  randomMode: false,
+
+  maxDices: 2,
+
   showProgressBar: function() {
     return this.get('diceCounter') > 0;
   }.property('diceCounter'),
@@ -44,30 +48,63 @@ export default Ember.Controller.extend({
     return 0;
   }.property('diceSum', 'maxSum'),
 
+  deleteAllDices: function() {
+    var allDices = this.get('model');
+    allDices.forEach(function(dice) {
+      dice.deleteRecord();
+    });
+  },
+
   actions: {
     createDice: function(newFaces) {
-      var dice = this.store.createRecord('dice', {
-        faces: newFaces,
-        score: Math.floor(Math.random() * newFaces)+1,
-        css: this.get('isEven')
-      });
+      if(!this.get('randomMode')){
+        var dice = this.store.createRecord('dice', {
+          faces: newFaces,
+          score: Math.floor(Math.random() * newFaces)+1
+        });
+      }
     },
     incrementFaces: function() {
-      if(this.get('diceFaces')<6){
         this.incrementProperty('diceFaces');
-      }
     },
     decrementFaces: function() {
       if(this.get('diceFaces')>2){
         this.decrementProperty('diceFaces');
       }
     },
+    incrementDices: function() {
+      this.incrementProperty('maxDices');
+    },
+    decrementDices: function() {
+      if(this.get('maxDices')>1){
+        this.decrementProperty('maxDices');
+      }
+    },
     rollAll: function() {
+      if(this.get('randomMode')){
+        var randomDiceAmount = Math.floor(Math.random() * this.get('maxDices'))+1;
+        if(randomDiceAmount !== this.get('model').get('length')){
+          this.deleteAllDices();
+          var faces = this.get('diceFaces');
+          for(var i=0; i<randomDiceAmount; i++){
+            var dice = this.store.createRecord('dice', {
+                faces: faces,
+                score: Math.floor(Math.random() * faces)+1
+            });
+          }
+          return;
+        }
+      }
       var allDices = this.get('model');
       allDices.forEach(function(dice) {
         var newScore = Math.floor(Math.random() * dice.get('faces'))+1;
         dice.set('score', newScore);
       });
+
+    },
+    toggleMode: function() {
+      this.deleteAllDices();
+      this.toggleProperty('randomMode');
     }
   }
 });

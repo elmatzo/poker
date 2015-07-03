@@ -7,4 +7,12 @@ export default function(){
     this.childOf('.game'),
     this.use('toRight')
   );
-};
+  this.transition(
+    this.childOf('.settings-prop'),
+    this.toValue(function(toValue, fromValue) {
+      return toValue && fromValue && toValue > fromValue;
+    }),
+    this.use('toLeft'),
+    this.reverse('toRight')
+  );
+}
