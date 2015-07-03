@@ -13,6 +13,14 @@ p {
   font-size: 1.5em;
   border-radius: 5px;
 }
+.swag {
+  font-family: 'Oswald', sans-serif;
+  margin-top: 0.75em;
+  font-weight: bold;
+}
+.swag button{
+  border: 2px solid black;
+}
 .settings-prop {
   border: 1px solid black;
   height: 2em;
