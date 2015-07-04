@@ -7,6 +7,10 @@ export default Ember.Controller.extend({
 
   maxDices: 2,
 
+  showError: function() {
+    return false;
+  }.property(),
+
   showProgressBar: function() {
     return this.get('diceCounter') > 0;
   }.property('diceCounter'),
@@ -62,6 +66,7 @@ export default Ember.Controller.extend({
           faces: newFaces,
           score: Math.floor(Math.random() * newFaces)+1
         });
+        this.set('showError', false);
       }
     },
     incrementFaces: function() {
@@ -95,14 +100,20 @@ export default Ember.Controller.extend({
           return;
         }
       }
+      else{
+        if(this.get('model').get('length') === 0){
+          this.set('showError', true);
+          return;
+        }
+      }
       var allDices = this.get('model');
       allDices.forEach(function(dice) {
         var newScore = Math.floor(Math.random() * dice.get('faces'))+1;
         dice.set('score', newScore);
       });
-
     },
     toggleMode: function() {
+      this.set('showError', false);
       this.deleteAllDices();
       this.toggleProperty('randomMode');
     }

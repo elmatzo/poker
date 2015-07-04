@@ -6,6 +6,9 @@ h1, p {
 p {
   margin-top: 0.25em;
 }
+p.error{
+  color: red;
+}
 .dice {
   border: 1px solid black;
   height: 3em;
@@ -22,11 +25,18 @@ p {
   border: 2px solid black;
 }
 .settings-prop {
-  border: 1px solid black;
   height: 2em;
   line-height: 2em;
   font-size: 1.25em;
   border-radius: 5px;
+}
+.settings-prop-norm{
+  border: 1px solid black;
+  color: black;
+}
+.settings-prop-error{
+  border: 2px solid red;
+  color: red;
 }
 .settings-box {
   padding: 5px;

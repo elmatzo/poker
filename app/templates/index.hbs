@@ -5,36 +5,39 @@
     <button type="button" {{bind-attr class="randomMode:btn-primary:btn-default :btn"}} {{action 'toggleMode'}}>Zufall</button>
   </div>
 </div>
-{{#if randomMode}}
+{{#liquid-if randomMode class="randomMode"}}
 <p>Maximale Augenzahl</p>
 {{else}}
 <p>Augenzahl</p>
-{{/if}}
+{{/liquid-if}}
 <div class="row settings">
   <div class="settings-box col-xs-2 col-xs-offset-3">
     <button type="btn" class="btn btn-danger" {{action 'decrementFaces'}}>-</button>
   </div>
   <div class="settings-box col-xs-2">
-    <div class="settings-prop" {{action 'createDice' diceFaces}}>{{liquid-bind diceFaces}}</div>
+    <div {{bind-attr class="showError:settings-prop-error:settings-prop-norm :settings-prop"}} {{action 'createDice' diceFaces}}>{{liquid-bind diceFaces}}</div>
   </div>
   <div class="settings-box col-xs-2">
     <button type="btn" class="btn btn-success" {{action 'incrementFaces'}}>+</button>
   </div>
 </div>
-{{#if randomMode}}
+{{#liquid-if randomMode class="randomMode"}}
 <p>Maximale Würfel</p>
 <div class="row settings">
   <div class="settings-box col-xs-2 col-xs-offset-3">
     <button type="btn" class="btn btn-danger" {{action 'decrementDices'}}>-</button>
   </div>
   <div class="settings-box col-xs-2">
-    <div class="settings-prop">{{liquid-bind maxDices}}</div>
+    <div class="settings-prop settings-prop-norm">{{liquid-bind maxDices}}</div>
   </div>
   <div class="settings-box col-xs-2">
     <button type="btn" class="btn btn-success" {{action 'incrementDices'}}>+</button>
   </div>
 </div>
-{{/if}}
+{{/liquid-if}}
+{{#liquid-if showError class="showError"}}
+<p class="error">Es muss zuerst ein W&uuml;rfel hinzugef&uuml;gt werden</p>
+{{/liquid-if}}
 <div class="row swag">
   <button type="btn" class="btn btn-default col-xs-10 col-xs-offset-1" {{action 'rollAll'}}>S W A G</button>
 </div>
